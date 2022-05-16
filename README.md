@@ -1,63 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Translation basket checkout API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project implements a API module to calculate the translation price for a given basket that contains documents to be translated into other languages.
+This module can be part of a checkout process  
 
-## About Laravel
+## Installing:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Clone repository: `git clone https://github.com/nayerd/translationapi.git`.
+2. Move to project folder: `cd translationapi`.
+3. Duplicate .env.example file, rename to .env and set your variables. (Check env.testing for testing environment)
+4. Install project dependencies: `composer install`.
+5. Execute deploy: `php artisan deploy`.
+6. The script can create some example data (will ask to the user).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tests:
+Run: `php artisan test`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## API endpoints:
+You can use Postman to test and use the endpoints. There is a Postman file that contains the collection of the endpoints.
+1. Go to the project folder
+2. Find the file translationapi.postman_collection.json 
+3. Open the file with Postman
 
-## Learning Laravel
+```
+Create a new basket:
+POST - http://127.0.0.1:8000/api/basket
+Body object:
+{
+  "project_id": "ABC",
+  "customer_id": "23456",
+  "expected_due_date": "2022-12-31",
+  "target_languages" : [
+      "es_ES",
+      "en_GB",
+      "ca_ES",
+  ]
+}
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-------------------------------------------
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Add file to the basket:
+POST - http://127.0.0.1:8000/api/basket_document
+Body object:
+{
+    "project_id": "ABC",
+    "file_id": "text_file_1",
+    "file_name": "translation_file_name",
+    "file_type": "txt",
+    "file_content": "This is the content of the file#LW-Test#This is another sentence#LW-Test#This is part of the content#LW-Test#This is the content of the file",
+    "comments": "This is a comment for the given file",
+}
 
-## Laravel Sponsors
+-------------------------------------------
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Get basket data:
+GET - http://127.0.0.1:8000/api/basket/{project_id}
 
-### Premium Partners
+-------------------------------------------
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Challenge description  
+We want to provide a REST API to satisfy the following business requirements gathered from our user story mapping session:
 
-## Contributing
+**Translation basket (basket) creation:**   
+We can create a basket by specifying a project id, a customer id, a list of target languages (language codes) and an expected due date.
+Project id will be the identifier for this basket.  
+  
+**Add files to translate to the basket:**  
+We now attach the files we already uploaded using another API to the project.
+In order to do so we add to the project with a `project id` the file entities providing the following for each file: `file id`, `file name`, `file type`, `file content`, and `comments`.  
+The "file type" will be the extension of the file.  
+The "file content" consist of the plain sentences that are inside the file splitted by the token '#LW-Test#'.   
+The comments are only for the consideration of the translator once it gets there.  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**View a basket:**  
+At any time, the API client should be able to check what's inside the basket with certain id.  
+Our endpoint would return: 
+The project id, the customer id, the target languages, the due date, the remaining time for the due date. And...  
+The list of files indicating the id, name, type, and comments. And...   
+The calculated price for the translation based on items we have so far.
+ 
+### Acceptance criteria for price calculation 
+- Standard price per word is 0,07€  
+- When a word is repeated inside the same file the price is 0,02€.
+- When a full sentence is repeated in the same file the price is 0 for the whole sentence.
+- When a word is repeated in another file the price is 0,05€.
+- When a full sentence is repeated in another file the price is 0,01€ for each word.
+- For PDF type formats the price is 20% more than the standard one.
+- For PSD type formats (Photoshop) the price is 35% more than the standard one.
+- The target language "es-ES" gets a 20% discount on the total price.
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
