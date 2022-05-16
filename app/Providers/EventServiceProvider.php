@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\BasketDocument;
+use App\Models\BasketTargetLanguage;
+use App\Observers\BasketDocumentObserver;
+use App\Observers\BasketTargetLanguageObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,7 +31,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (config('translationapi.enable_observers') == true) {
+            BasketDocument::observe(BasketDocumentObserver::class);
+            BasketTargetLanguage::observe(BasketTargetLanguageObserver::class);
+        }
     }
 
     /**
