@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(LanguagesTableSeeder::class);
+
+        if (env('APP_ENV') == "testing") {
+            return true;
+        }
+
+        $dummy = $this->command->ask('Do you want to create example data? (y/n) ', 'n');
+        if (strtolower($dummy) == 'y') {
+            $this->call(DummyDataSeeder::class);
+        }
     }
 }

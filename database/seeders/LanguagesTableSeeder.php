@@ -1,0 +1,136 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class LanguagesTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $data = [
+            ['iso' => 'af_ZA', 'name' => 'Afrikaans', 'native_name' => 'Afrikaans'],
+            ['iso' => 'gn_PY', 'name' => 'Guaraní', 'native_name' => 'Avañe\'ẽ'],
+            ['iso' => 'ay_BO', 'name' => 'Aymara', 'native_name' => 'Aymar aru'],
+            ['iso' => 'az_AZ', 'name' => 'Azeri', 'native_name' => 'Azərbaycan dili'],
+            ['iso' => 'id_ID', 'name' => 'Indonesian', 'native_name' => 'Bahasa Indonesia'],
+            ['iso' => 'ms_MY', 'name' => 'Malay', 'native_name' => 'Bahasa Melayu'],
+            ['iso' => 'jv_ID', 'name' => 'Javanese', 'native_name' => 'Basa Jawa'],
+            ['iso' => 'bs_BA', 'name' => 'Bosnian', 'native_name' => 'Bosanski'],
+            ['iso' => 'ca_ES', 'name' => 'Catalan', 'native_name' => 'Català'],
+            ['iso' => 'cs_CZ', 'name' => 'Czech', 'native_name' => 'Čeština'],
+            ['iso' => 'ck_US', 'name' => 'Cherokee', 'native_name' => 'Cherokee'],
+            ['iso' => 'cy_GB', 'name' => 'Welsh', 'native_name' => 'Cymraeg'],
+            ['iso' => 'da_DK', 'name' => 'Danish', 'native_name' => 'Dansk'],
+            ['iso' => 'se_NO', 'name' => 'Northern Sámi', 'native_name' => 'Davvisámegiella'],
+            ['iso' => 'de_DE', 'name' => 'German', 'native_name' => 'Deutsch'],
+            ['iso' => 'et_EE', 'name' => 'Estonian', 'native_name' => 'Eesti'],
+            ['iso' => 'en_IN', 'name' => 'English (India)', 'native_name' => 'English (India)'],
+            ['iso' => 'en_PI', 'name' => 'English (Pirate)', 'native_name' => 'English (Pirate)'],
+            ['iso' => 'en_GB', 'name' => 'English (UK)', 'native_name' => 'English (UK)'],
+            ['iso' => 'en_UD', 'name' => 'English (Upside Down)', 'native_name' => 'English (Upside Down)'],
+            ['iso' => 'en_US', 'name' => 'English (US)', 'native_name' => 'English (US)'],
+            ['iso' => 'es_LA', 'name' => 'Spanish', 'native_name' => 'Español'],
+            ['iso' => 'es_CL', 'name' => 'Spanish (Chile)', 'native_name' => 'Español (Chile)'],
+            ['iso' => 'es_CO', 'name' => 'Spanish (Colombia)', 'native_name' => 'Español (Colombia)'],
+            ['iso' => 'es_ES', 'name' => 'Spanish (Spain)', 'native_name' => 'Español (España)'],
+            ['iso' => 'es_MX', 'name' => 'Spanish (Mexico)', 'native_name' => 'Español (México)'],
+            ['iso' => 'es_VE', 'name' => 'Spanish (Venezuela)', 'native_name' => 'Español (Venezuela)'],
+            ['iso' => 'eo_EO', 'name' => 'Esperanto', 'native_name' => 'Esperanto'],
+            ['iso' => 'eu_ES', 'name' => 'Basque', 'native_name' => 'Euskara'],
+            ['iso' => 'tl_PH', 'name' => 'Filipino', 'native_name' => 'Filipino'],
+            ['iso' => 'fo_FO', 'name' => 'Faroese', 'native_name' => 'Føroyskt'],
+            ['iso' => 'fr_FR', 'name' => 'French (France)', 'native_name' => 'Français (France)'],
+            ['iso' => 'fr_CA', 'name' => 'French (Canada)', 'native_name' => 'Français (Canada)'],
+            ['iso' => 'fy_NL', 'name' => 'Frisian', 'native_name' => 'Frysk'],
+            ['iso' => 'ga_IE', 'name' => 'Irish', 'native_name' => 'Gaeilge'],
+            ['iso' => 'gl_ES', 'name' => 'Galician', 'native_name' => 'Galego'],
+            ['iso' => 'ko_KR', 'name' => 'Korean', 'native_name' => '한국어'],
+            ['iso' => 'hr_HR', 'name' => 'Croatian', 'native_name' => 'Hrvatski'],
+            ['iso' => 'xh_ZA', 'name' => 'Xhosa', 'native_name' => 'isiXhosa'],
+            ['iso' => 'zu_ZA', 'name' => 'Zulu', 'native_name' => 'isiZulu'],
+            ['iso' => 'is_IS', 'name' => 'Icelandic', 'native_name' => 'Íslenska'],
+            ['iso' => 'it_IT', 'name' => 'Italian', 'native_name' => 'Italiano'],
+            ['iso' => 'ka_GE', 'name' => 'Georgian', 'native_name' => 'ქართული'],
+            ['iso' => 'sw_KE', 'name' => 'Swahili', 'native_name' => 'Kiswahili'],
+            ['iso' => 'tl_ST', 'name' => 'Klingon', 'native_name' => 'tlhIngan-Hol'],
+            ['iso' => 'ku_TR', 'name' => 'Kurdish', 'native_name' => 'Kurdî'],
+            ['iso' => 'lv_LV', 'name' => 'Latvian', 'native_name' => 'Latviešu'],
+            ['iso' => 'fb_LT', 'name' => 'Leet Speak', 'native_name' => 'Leet Speak'],
+            ['iso' => 'lt_LT', 'name' => 'Lithuanian', 'native_name' => 'Lietuvių'],
+            ['iso' => 'li_NL', 'name' => 'Limburgish', 'native_name' => 'Lèmbörgs'],
+            ['iso' => 'la_VA', 'name' => 'Latin', 'native_name' => 'lingua latina'],
+            ['iso' => 'hu_HU', 'name' => 'Hungarian', 'native_name' => 'Magyar'],
+            ['iso' => 'mg_MG', 'name' => 'Malagasy', 'native_name' => 'Malagasy'],
+            ['iso' => 'mt_MT', 'name' => 'Maltese', 'native_name' => 'Malti'],
+            ['iso' => 'nl_NL', 'name' => 'Dutch', 'native_name' => 'Nederlands'],
+            ['iso' => 'nl_BE', 'name' => 'Dutch (België)', 'native_name' => 'Nederlands (België)'],
+            ['iso' => 'ja_JP', 'name' => 'Japanese', 'native_name' => '日本語'],
+            ['iso' => 'nb_NO', 'name' => 'Norwegian (bokmal)', 'native_name' => 'Norsk (bokmål)'],
+            ['iso' => 'nn_NO', 'name' => 'Norwegian (nynorsk)', 'native_name' => 'Norsk (nynorsk)'],
+            ['iso' => 'uz_UZ', 'name' => 'Uzbek', 'native_name' => 'O\'zbek'],
+            ['iso' => 'pl_PL', 'name' => 'Polish', 'native_name' => 'Polski'],
+            ['iso' => 'pt_BR', 'name' => 'Portuguese (Brazil)', 'native_name' => 'Português (Brasil)'],
+            ['iso' => 'pt_PT', 'name' => 'Portuguese (Portugal)', 'native_name' => 'Português (Portugal)'],
+            ['iso' => 'qu_PE', 'name' => 'Quechua', 'native_name' => 'Qhichwa'],
+            ['iso' => 'ro_RO', 'name' => 'Romanian', 'native_name' => 'Română'],
+            ['iso' => 'rm_CH', 'name' => 'Romansh', 'native_name' => 'Rumantsch'],
+            ['iso' => 'ru_RU', 'name' => 'Russian', 'native_name' => 'Русский'],
+            ['iso' => 'sq_AL', 'name' => 'Albanian', 'native_name' => 'Shqip'],
+            ['iso' => 'sk_SK', 'name' => 'Slovak', 'native_name' => 'Slovenčina'],
+            ['iso' => 'sl_SI', 'name' => 'Slovenian', 'native_name' => 'Slovenščina'],
+            ['iso' => 'so_SO', 'name' => 'Somali', 'native_name' => 'Soomaaliga'],
+            ['iso' => 'fi_FI', 'name' => 'Finnish', 'native_name' => 'Suomi'],
+            ['iso' => 'sv_SE', 'name' => 'Swedish', 'native_name' => 'Svenska'],
+            ['iso' => 'th_TH', 'name' => 'Thai', 'native_name' => 'ภาษาไทย'],
+            ['iso' => 'vi_VN', 'name' => 'Vietnamese', 'native_name' => 'Tiếng Việt'],
+            ['iso' => 'tr_TR', 'name' => 'Turkish', 'native_name' => 'Türkçe'],
+            ['iso' => 'zh_CN', 'name' => 'Simplified Chinese (China)', 'native_name' => '中文(简体)'],
+            ['iso' => 'zh_TW', 'name' => 'Traditional Chinese (Taiwan)', 'native_name' => '中文(台灣)'],
+            ['iso' => 'zh_HK', 'name' => 'Traditional Chinese (Hong Kong)', 'native_name' => '中文(香港)'],
+            ['iso' => 'el_GR', 'name' => 'Greek', 'native_name' => 'Ελληνικά'],
+            ['iso' => 'gx_GR', 'name' => 'Classical Greek', 'native_name' => 'Ἑλληνική ἀρχαία'],
+            ['iso' => 'be_BY', 'name' => 'Belarusian', 'native_name' => 'Беларуская'],
+            ['iso' => 'bg_BG', 'name' => 'Bulgarian', 'native_name' => 'Български'],
+            ['iso' => 'kk_KZ', 'name' => 'Kazakh', 'native_name' => 'Қазақша'],
+            ['iso' => 'mk_MK', 'name' => 'Macedonian', 'native_name' => 'Македонски'],
+            ['iso' => 'mn_MN', 'name' => 'Mongolian', 'native_name' => 'Монгол'],
+            ['iso' => 'sr_RS', 'name' => 'Serbian', 'native_name' => 'Српски'],
+            ['iso' => 'tt_RU', 'name' => 'Tatar', 'native_name' => 'татарча / Tatarça / تاتارچا'],
+            ['iso' => 'tg_TJ', 'name' => 'Tajik', 'native_name' => 'тоҷикӣ, تاجیکی‎, tojikī'],
+            ['iso' => 'uk_UA', 'name' => 'Ukrainian', 'native_name' => 'Українська'],
+            ['iso' => 'hy_AM', 'name' => 'Armenian', 'native_name' => 'Հայերեն'],
+            ['iso' => 'yi_DE', 'name' => 'Yiddish', 'native_name' => 'ייִדיש'],
+            ['iso' => 'he_IL', 'name' => 'Hebrew', 'native_name' => '‏עברית‏'],
+            ['iso' => 'ur_PK', 'name' => 'Urdu', 'native_name' => 'اردو'],
+            ['iso' => 'ar_AR', 'name' => 'Arabic', 'native_name' => 'العربية'],
+            ['iso' => 'ps_AF', 'name' => 'Pashto', 'native_name' => 'پښتو'],
+            ['iso' => 'fa_IR', 'name' => 'Persian', 'native_name' => 'فارسی'],
+            ['iso' => 'sy_SY', 'name' => 'Syriac', 'native_name' => '‏ܐܪܡܝܐ‏'],
+            ['iso' => 'ne_NP', 'name' => 'Nepali', 'native_name' => 'नेपाली'],
+            ['iso' => 'mr_IN', 'name' => 'Marathi', 'native_name' => 'मराठी'],
+            ['iso' => 'sa_IN', 'name' => 'Sanskrit', 'native_name' => 'संस्कृतम्'],
+            ['iso' => 'hi_IN', 'name' => 'Hindi', 'native_name' => 'हिन्दी'],
+            ['iso' => 'bn_IN', 'name' => 'Bengali', 'native_name' => 'বাংলা'],
+            ['iso' => 'pa_IN', 'name' => 'Punjabi', 'native_name' => 'ਪੰਜਾਬੀ'],
+            ['iso' => 'gu_IN', 'name' => 'Gujarati', 'native_name' => 'ગુજરાતી'],
+            ['iso' => 'ta_IN', 'name' => 'Tamil', 'native_name' => 'தமிழ்'],
+            ['iso' => 'te_IN', 'name' => 'Telugu', 'native_name' => 'తెలుగు'],
+            ['iso' => 'kn_IN', 'name' => 'Kannada', 'native_name' => 'ಕನ್ನಡ'],
+            ['iso' => 'ml_IN', 'name' => 'Malayalam', 'native_name' => 'മലയാളം'],
+            ['iso' => 'km_KH', 'name' => 'Khmer', 'native_name' => 'ភាសាខ្មែរ'],
+        ];
+
+        DB::table('languages')->truncate();
+        DB::table('languages')->insert($data);
+    }
+}
+
+
