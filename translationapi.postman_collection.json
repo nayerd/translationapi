@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "4df2cd07-41b7-4a7d-a707-ac43d9fb0ca9",
+		"name": "Translation api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create basket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "project_id",
+							"value": "ABC",
+							"type": "text"
+						},
+						{
+							"key": "customer_id",
+							"value": "2345",
+							"type": "text"
+						},
+						{
+							"key": "expected_due_date",
+							"value": "2022-12-01",
+							"type": "text"
+						},
+						{
+							"key": "target_languages[0]",
+							"value": "es_ES",
+							"type": "text"
+						},
+						{
+							"key": "target_languages[1]",
+							"value": "en_GB",
+							"type": "text"
+						},
+						{
+							"key": "target_languages[2]",
+							"value": "ca_ES",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/basket/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"basket",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add file to basket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "project_id",
+							"value": "ABC",
+							"type": "text"
+						},
+						{
+							"key": "file_id",
+							"value": "text_file_1",
+							"type": "text"
+						},
+						{
+							"key": "file_name",
+							"value": "translation_name",
+							"type": "text"
+						},
+						{
+							"key": "file_type",
+							"value": "txt",
+							"type": "text"
+						},
+						{
+							"key": "file_content",
+							"value": "This is the content of the file#LW-Test#This is another sentence#LW-Test#This is the content#LW-Test#This is the content of the file",
+							"type": "text"
+						},
+						{
+							"key": "comments",
+							"value": "This a comment",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/basket_document",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"basket_document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get basket",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/api/basket/ABC",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"basket",
+						"ABC"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		}
+	]
+}
