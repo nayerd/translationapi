@@ -1,21 +1,21 @@
-## Translation basket checkout API
+# Translation basket checkout API
 
 This project implements a API module to calculate the translation price for a given basket that contains documents to be translated into other languages.
-This module can be part of a checkout process  
+This module can be part of a checkout process and can be installed as a microservice.  
 
-## Installing:
+### Installing:
 
-1. Clone repository: `git clone https://github.com/nayerd/translationapi.git`.
-2. Move to project folder: `cd translationapi`.
+1. Clone repository: `git clone https://github.com/nayerd/translationapi.git`
+2. Move to project folder: `cd translationapi`
 3. Duplicate .env.example file, rename to .env and set your variables. (Check env.testing for testing environment)
-4. Install project dependencies: `composer install`.
-5. Execute deploy: `php artisan deploy`.
+4. Install project dependencies: `composer install`
+5. Execute deploy: `php artisan deploy`
 6. The script can create some example data (will ask to the user).
 
-## Tests:
+### Tests:
 Run: `php artisan test`.
 
-## API endpoints:
+### API endpoints:
 You can use Postman to test and use the endpoints. There is a Postman file that contains the collection of the endpoints.
 1. Go to the project folder
 2. Find the file translationapi.postman_collection.json 
@@ -56,6 +56,7 @@ Get basket data:
 GET - http://127.0.0.1:8000/api/basket/{project_id}
 
 -------------------------------------------
+```
 
 ## Challenge description  
 We want to provide a REST API to satisfy the following business requirements gathered from our user story mapping session:
